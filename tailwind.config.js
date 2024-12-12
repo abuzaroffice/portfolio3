@@ -11,6 +11,11 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        Cursive: ["var(--font-Gilroy)"],
+        Mazius: ["var(--font-Mazius)"],
+        
+      },
     },
   },
   plugins: [],
