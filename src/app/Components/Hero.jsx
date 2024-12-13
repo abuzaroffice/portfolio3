@@ -63,7 +63,7 @@ const Hero = () => {
           >
             <img
               ref={imageRef}
-              src="/Abuzar.jpg"
+              src="/Abuzar.JPG"
               alt="Abuzar Malik"
               className="w-full h-full object-cover"
             />
