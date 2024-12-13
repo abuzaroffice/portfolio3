@@ -91,10 +91,10 @@ const Projects = () => {
                   className="w-full h-full object-cover transition-transform duration-700 ease-in-out hover:scale-110"
                 />
               </div>
-              <h3 className="text-2xl font-Cursive font-semibold text-white mb-2 transition-all ease-in-out duration-300 hover:text-yellow-400">
+              <h3 className="text-2xl font-Cursive font-semibold mb-2 transition-all ease-in-out duration-300 hover:text-yellow-400">
                 {project.title}
               </h3>
-              <p className="font-Cursive text-white mb-4">{project.description}</p>
+              <p className="font-Cursive  mb-4">{project.description}</p>
               <a
                 href={project.link}
                 className="inline-block px-6 py-2 font-Cursive bg-green-600 text-black font-semibold rounded-md shadow-md hover:bg-green-700 transition-all ease-in-out duration-300"

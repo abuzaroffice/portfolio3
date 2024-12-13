@@ -6,16 +6,19 @@ const LoadingScreen = () => {
   const textRef = useRef([]);
 
   useEffect(() => {
-  
+   
+    document.body.style.overflow = "hidden";
+
+    // Faster animations
     gsap.fromTo(
       textRef.current,
       { y: "100%", opacity: 0 },
       {
         y: "0%",
         opacity: 1,
-        duration: 0.6,
-        stagger: 0.3,
-        delay: 0.5,
+        duration: 0.4, 
+        stagger: 0.2,  // Faster stagger
+        delay: 0.3,    // Reduced delay
         ease: "power2.out",
       }
     );
@@ -23,17 +26,21 @@ const LoadingScreen = () => {
     gsap.to(textRef.current, {
       y: "-100%",
       opacity: 0,
-      duration: 0.6,
-      delay: 3,
-      stagger: 0.3,
+      duration: 0.4,  // Reduced duration for faster animation
+      delay: 2,      // Reduced delay
+      stagger: 0.2,
       ease: "power2.in",
     });
 
     gsap.to(loadingScreenRef.current, {
       y: "-100%",
-      duration: 1,
-      delay: 4.5,
+      duration: 0.6,  // Reduced duration for faster exit
+      delay: 2.5,    // Adjusted delay
       ease: "power2.inOut",
+      onComplete: () => {
+        // Re-enable scrolling after the loading screen animation completes
+        document.body.style.overflow = "auto";
+      },
     });
   }, []);
 

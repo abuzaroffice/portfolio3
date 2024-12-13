@@ -71,7 +71,7 @@ const About = () => {
         {/* Heading */}
         <div
           ref={headingRef}
-          className="about-heading text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400"
+          className="about-heading text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg"
         >
           <h1>About me</h1>
         </div>
@@ -97,6 +97,17 @@ const About = () => {
               {word}
             </span>
           ))}
+        </div>
+
+        {/* Download Resume Button */}
+        <div className="mt-10">
+          <a
+            href="/Abuzar'sCV.docx"  
+            download
+            className="inline-block px-8 py-3 mt-6 text-lg font-Cursive font-semibold bg-green-500 rounded-lg shadow-lg hover:bg-green-600 transition-colors"
+          >
+            Download Resume
+          </a>
         </div>
       </div>
     </section>

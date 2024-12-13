@@ -22,8 +22,7 @@ const Dock = () => {
     <div
       ref={dockRef}
       className={`fixed 
-        bottom-4 left-4  // Bottom-left corner for small screens
-        sm:bottom-8 sm:left-1/2 sm:transform sm:-translate-x-1/2  // Center bottom for larger screens
+        bottom-4 left-4  // Positioned on the bottom-left corner
         p-4 rounded-full shadow-lg z-50
         ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"}
         transition-all`}

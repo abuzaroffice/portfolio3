@@ -19,7 +19,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className=" font-Cursive text-white py-10 px-6">
+    <footer className=" font-Cursive py-10 px-6">
       <div className="max-w-screen-xl mx-auto text-center footer-content">
         {/* Footer Heading */}
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-Mazius mb-6 text-green-400 tracking-tight leading-tight">
@@ -73,7 +73,7 @@ const Footer = () => {
             <h3 className="text-xl font-semibold mb-3 text-green-400">Quick Links</h3>
             <ul>
               <li><a href="#about-section" className="hover:text-green-300 transition duration-300 ease-in-out">About</a></li>
-              <li><a href="#home-ssection" className="hover:text-green-300 transition duration-300 ease-in-out">Home</a></li>
+              <li><a href="#navbar" className="hover:text-green-300 transition duration-300 ease-in-out">Home</a></li>
               <li><a href="#projects-section" className="hover:text-green-300 transition duration-300 ease-in-out">Projects</a></li>
               <li><a href="#contact-section" className="hover:text-green-300 transition duration-300 ease-in-out">Contact</a></li>
             </ul>

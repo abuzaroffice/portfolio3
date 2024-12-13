@@ -8,17 +8,20 @@ const Hero = () => {
   const textRefs = useRef([]);
 
   useEffect(() => {
-    // Create a GSAP timeline for Hero animation with a 5-second delay
+    // Reduce the delay to sync with the loading screen animation
+    const delayAfterLanding = 2; // Reduced delay to sync with loading screen
+
+    // Create a GSAP timeline for Hero animation
     const tl = gsap.timeline({
-      defaults: { duration: 1.5, ease: "power3.out" },
-      delay: 5, // This adds a 5-second delay before the Hero animation starts
+      defaults: { duration: 0.8, ease: "power3.out" }, // Reduced duration
+      delay: delayAfterLanding, // Start after landing animation completes
     });
 
-    // Animate the image with a sliding effect and fading in
+    // Animate the image with a fade-up effect
     tl.fromTo(
       imageRef.current,
-      { x: -100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1.8, ease: "power2.out" }
+      { y: 100, opacity: 0 }, // Start position: below with 0 opacity
+      { y: 0, opacity: 1, duration: 1.0, ease: "power2.out" } // Reduced duration
     );
 
     // Animate the text with a smooth vertical slide and fade-in effect
@@ -28,22 +31,22 @@ const Hero = () => {
       {
         y: 0,
         opacity: 1,
-        stagger: 0.2,
-        duration: 1.4,
+        stagger: 0.15, // Faster stagger
+        duration: 0.8, // Reduced duration
         ease: "power2.out",
       },
-      "-=1"
+      "-=0.8"
     );
 
-    // Apply a static glowing effect around the image container (not the image itself) after a delay
+    // Apply a static glowing effect around the image container
     gsap.fromTo(
       imageContainerRef.current,
       { boxShadow: "0 0 0px rgba(72, 187, 120, 0.7)" }, // Initial state (no glow)
       {
         boxShadow: "0 0 30px 10px rgba(72, 187, 120, 0.7)", // Green static glow
-        duration: 2,
+        duration: 1.0, // Reduced duration
         ease: "power2.out",
-        delay: 5, // Delay to start after 5 seconds (sync with other animations)
+        delay: delayAfterLanding + 0.8, // Start after image and text animations
       }
     );
   }, []);
@@ -67,7 +70,7 @@ const Hero = () => {
           </div>
 
           {/* Right - Text */}
-          <div className="text-center text-6xl lg:text-9xl space-y-2 lg:space-y-4">
+          <div className="text-center text-6xl mt-5 lg:text-9xl space-y-2 lg:space-y-4">
             <h1
               ref={(el) => { if (el) textRefs.current[0] = el }}
               className="font-Cursive text-green-400"

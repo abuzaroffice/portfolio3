@@ -17,7 +17,7 @@ const Skills = () => {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.html-progress',
-          start: 'top 80%', // Start animation when top of the skill section reaches 80% of the viewport
+          start: 'top 80%', 
           end: 'bottom top',
           scrub: true,
         },
@@ -28,12 +28,12 @@ const Skills = () => {
       '.css-progress',
       { width: '0%' },
       {
-        width: '85%', // Set CSS progress bar width to 85%
+        width: '85%', 
         duration: 2,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.css-progress',
-          start: 'top 80%', // Start animation when top of the skill section reaches 80% of the viewport
+          start: 'top 80%', 
           end: 'bottom top',
           scrub: true,
         },
@@ -65,7 +65,7 @@ const Skills = () => {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.react-progress',
-          start: 'top 80%', // Start animation when top of the skill section reaches 80% of the viewport
+          start: 'top 80%', 
           end: 'bottom top',
           scrub: true,
         },
@@ -76,12 +76,12 @@ const Skills = () => {
       '.next-progress',
       { width: '0%' },
       {
-        width: '70%', // Set Next.js progress bar width to 70%
+        width: '70%', 
         duration: 0.5,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: '.next-progress',
-          start: 'top 80%', // Start animation when top of the skill section reaches 80% of the viewport
+          start: 'top 80%', 
           end: 'bottom top',
           scrub: true,
         },
@@ -92,7 +92,7 @@ const Skills = () => {
       '.tailwind-progress',
       { width: '0%' },
       {
-        width: '80%', // Set Tailwind CSS progress bar width to 80%
+        width: '80%', 
         duration: 2,
         ease: 'power2.out',
         scrollTrigger: {
@@ -106,9 +106,9 @@ const Skills = () => {
   }, []);
 
   return (
-    <section className="py-8">
+    <section className="py-8 container mx-auto">
       <div id="skills-section" className="text-center">
-        <h1 className="font-Mazius text-green-400 text-4xl sm:text-5xl md:text-6xl">Skills</h1>
+        <h1 className="text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg">Skills</h1>
       </div>
 
       {/* Skills List */}

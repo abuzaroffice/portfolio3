@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useSwipeable } from 'react-swipeable';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,12 +16,13 @@ const images = [
 ];
 
 const ImageCarousel = () => {
-  const carouselRef = useRef();
-  const modalRef = useRef();
+  const carouselRef = useRef(null);
+  const modalRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Auto-slide effect
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -29,14 +31,17 @@ const ImageCarousel = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // GSAP animations
   useEffect(() => {
+    if (!carouselRef.current) return; // Ensure ref is attached
+
     const carouselItems = carouselRef.current.querySelectorAll('.carousel-item');
     gsap.fromTo(
       carouselItems,
-      { opacity: 0, x: 50 },
+      { opacity: 0, y: 50 },
       {
         opacity: 1,
-        x: 0,
+        y: 0,
         duration: 1,
         ease: 'power3.out',
         stagger: 0.2,
@@ -49,12 +54,12 @@ const ImageCarousel = () => {
     );
   }, []);
 
+  // Open image in modal
   const openPopup = (image) => {
     if (isAnimating) return;
     setIsAnimating(true);
     setSelectedImage(image);
 
-    // Disable background scrolling
     document.body.style.overflow = 'hidden';
 
     gsap.fromTo(
@@ -62,7 +67,7 @@ const ImageCarousel = () => {
       { opacity: 0, scale: 0.9 },
       {
         opacity: 1,
-        scale: 1,
+        scale: 0.85,
         duration: 0.4,
         ease: 'power3.out',
         onComplete: () => setIsAnimating(false),
@@ -70,11 +75,11 @@ const ImageCarousel = () => {
     );
   };
 
+  // Close image modal
   const closePopup = () => {
     if (isAnimating) return;
     setIsAnimating(true);
 
-    // Enable background scrolling again
     document.body.style.overflow = 'auto';
 
     gsap.to(modalRef.current, {
@@ -89,14 +94,24 @@ const ImageCarousel = () => {
     });
   };
 
+  // Swipe functionality
+  const handlers = useSwipeable({
+    onSwipedLeft: () => setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length),
+    onSwipedRight: () => setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length),
+  });
+
   return (
-    <div className="max-w-screen-xl container mx-auto px-4 py-8">
-      <h1 className="text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 text-center">
-        Photography
+    <div id='photo-section' className="max-w-screen-xl container mx-auto px-4 py-8">
+      <h1 className="text-6xl text-center sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg mb-10">
+        Photography Showcase
       </h1>
 
       {/* Carousel */}
-      <div className="relative mt-16 overflow-hidden" ref={carouselRef}>
+      <div
+        className="relative overflow-hidden rounded-lg shadow-xl"
+        ref={carouselRef}
+        {...handlers}
+      >
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -107,13 +122,15 @@ const ImageCarousel = () => {
               className="carousel-item min-w-full flex items-center justify-center cursor-pointer relative"
               onClick={() => openPopup(image)}
             >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-3/4 h-64 object-cover rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 ease-out"
-              />
-              <div className="absolute bottom-4 bg-black bg-opacity-50 text-white text-center px-4 py-2 rounded">
-                {image.caption}
+              <div className="relative w-3/4 h-96">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="absolute inset-0 w-full h-full object-cover rounded-xl shadow-md hover:scale-110 transition-transform duration-500 ease-in-out border-4 border-white"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-xl flex items-end p-4">
+                  <span className="text-white font-Cursive text-xl font-medium">{image.caption}</span>
+                </div>
               </div>
             </div>
           ))}
@@ -123,13 +140,13 @@ const ImageCarousel = () => {
       {/* Popup Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 px-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
           ref={modalRef}
         >
-          <div className="relative w-full max-w-screen-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="relative w-9/12 max-w-96 mx-auto bg-white rounded-xl shadow-xl overflow-hidden border-4 border-gray-200">
             <button
               onClick={closePopup}
-              className="absolute top-2 right-2 bg-green-400 text-white px-3 py-2 rounded-full hover:bg-green-600 transition duration-200"
+              className="absolute top-4 right-4 bg-green-500 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:bg-green-600 transition duration-300"
             >
               ✕
             </button>
@@ -137,11 +154,13 @@ const ImageCarousel = () => {
               <img
                 src={selectedImage.src}
                 alt={selectedImage.alt}
-                className="w-full max-h-[70vh] object-contain rounded-lg"
+                className="w-full h-auto rounded-lg border-4 border-gray-300"
               />
-              <p className="text-gray-900 text-center mt-4 text-lg">
-                {selectedImage.caption}
-              </p>
+              <div className="mt-4 text-center">
+                <h2 className="text-2xl font-Cursive font-semibold text-gray-800">
+                  {selectedImage.caption}
+                </h2>
+              </div>
             </div>
           </div>
         </div>

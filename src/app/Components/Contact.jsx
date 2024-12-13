@@ -101,7 +101,7 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto text-center relative z-10">
         <h2
           ref={headingRef}
-          className="text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 mb-12 tracking-wide"
+          className="text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg"
         >
           Let's Connect
         </h2>
