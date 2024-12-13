@@ -1,55 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const SoundEffects = () => {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
-  // Create the background music instance outside of useEffect
-  const backgroundMusic = new Audio("/assets/sounds/Bgsound.mp3");
-  backgroundMusic.loop = true;
-  backgroundMusic.volume = 0.01;// Set the default volume to the lowest possible (0.01)
-
-  const clickSound = new Audio("/assets/sounds/Click.mp3");
+  // Use ref to persist the backgroundMusic instance across renders
+  const backgroundMusicRef = useRef(null);
+  const clickSoundRef = useRef(null);
 
   useEffect(() => {
-    // Try to play the background music automatically when the page loads
-    backgroundMusic.play().catch((err) => {
-      console.log("Autoplay failed:", err); // Handle potential autoplay failure
-    });
+    // Create the background music instance inside useEffect hook
+    backgroundMusicRef.current = new Audio("/assets/sounds/Bgsound.mp3");
+    backgroundMusicRef.current.loop = true;
+    backgroundMusicRef.current.volume = 0.1; // Set the default volume to the lowest possible (0.01)
 
-    // Mark the music as playing
-    setIsMusicPlaying(true);
+    clickSoundRef.current = new Audio("/assets/sounds/Click.mp3");
 
     // Event listener for click and scroll to start background music
+    const startAudio = () => {
+      if (!isMusicPlaying) {
+        backgroundMusicRef.current.play().catch((err) => {
+          console.log("Autoplay failed:", err); // Handle potential autoplay failure
+        });
+        setIsMusicPlaying(true);
+      }
+    };
+
+    // Add event listeners for user interactions
     document.body.addEventListener("click", startAudio);
     document.body.addEventListener("scroll", startAudio);
 
     // Play click sound on any click event
     const handleClick = () => {
-      clickSound.play();
+      clickSoundRef.current.play();
     };
 
- 
-
-    // Add event listeners to body for click and hover
+    // Add event listener to play click sound
     document.body.addEventListener("click", handleClick);
-
 
     // Cleanup event listeners when component is unmounted
     return () => {
       document.body.removeEventListener("click", startAudio);
       document.body.removeEventListener("scroll", startAudio);
       document.body.removeEventListener("click", handleClick);
-    
     };
-  }, []);
-
-  // Function to start background music after user interaction
-  const startAudio = () => {
-    if (!isMusicPlaying) {
-      backgroundMusic.play();
-      setIsMusicPlaying(true); // Mark music as playing
-    }
-  };
+  }, [isMusicPlaying]);
 
   return null; // No need to render anything in the DOM
 };
