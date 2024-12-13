@@ -71,7 +71,7 @@ const About = () => {
         {/* Heading */}
         <div
           ref={headingRef}
-          className="about-heading text-center  text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-Mazius text-green-400 drop-shadow-lg"
+          className="about-heading text-center  text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg"
         >
           <h1>About Me</h1>
         </div>
