@@ -20,17 +20,27 @@ import SoundEffects from "./Components/SoundEffect";
 const Dock = ({ toggleTheme, theme }) => {
   return (
     <div
-      className={`fixed bottom-4 left-4 flex items-center bg-gray-800 dark:bg-gray-200 p-3 rounded-full shadow-lg transition-all`}
+    className={`fixed bottom-4 left-4 flex items-center 
+      p-2 sm:p-3 
+      bg-gray-800 dark:bg-gray-200 
+      rounded-full shadow-lg transition-all`}
+  >
+    {/* Theme Toggle */}
+    <button
+      onClick={toggleTheme}
+      className={`flex items-center justify-center 
+        w-8 h-8 sm:w-10 sm:h-10 
+        bg-green-500 dark:bg-gray-300 
+        text-white dark:text-green-900 
+        rounded-full shadow-md 
+        hover:bg-green-600 dark:hover:bg-gray-400 
+        transition-transform hover:scale-110`}
+      aria-label="Toggle Theme"
     >
-      {/* Theme Toggle */}
-      <button
-        onClick={toggleTheme}
-        className="flex items-center justify-center w-10 h-10 bg-green-500 dark:bg-gray-300 text-white dark:text-green-900 rounded-full shadow-md hover:bg-green-600 dark:hover:bg-gray-400 transition-transform hover:scale-110"
-        aria-label="Toggle Theme"
-      >
-        {theme === "light" ? "🌙" : "☀️"}
-      </button>
-    </div>
+      {theme === "light" ? "🌙" : "☀️"}
+    </button>
+  </div>
+  
   );
 };
 

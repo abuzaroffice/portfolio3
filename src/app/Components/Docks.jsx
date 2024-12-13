@@ -23,7 +23,7 @@ const Dock = () => {
       ref={dockRef}
       className={`fixed 
         bottom-4 left-4  // Positioned on the bottom-left corner
-        p-4 rounded-full shadow-lg z-50
+        p-2 sm:p-4 rounded-full shadow-lg z-50
         ${theme === "dark" ? "bg-gray-900" : "bg-gray-100"}
         transition-all`}
       style={{
@@ -32,12 +32,13 @@ const Dock = () => {
     >
       <button
         onClick={toggleTheme}
-        className={`flex items-center justify-center w-12 h-12 rounded-full text-xl transition-transform hover:scale-125 ${
-          theme === "dark" ? "text-yellow-300 bg-green-500" : "text-yellow-500 bg-white"
-        }`}
+        className={`flex items-center justify-center 
+          w-10 h-10 sm:w-12 sm:h-12 
+          rounded-full text-lg sm:text-xl transition-transform hover:scale-125 
+          ${theme === "dark" ? "text-yellow-300 bg-green-500" : "text-yellow-500 bg-white"}`}
         aria-label="Toggle Theme"
       >
-        {theme === "dark" ? <BsSunFill size={24} /> : <BsMoonFill size={24} />}
+        {theme === "dark" ? <BsSunFill size={20} /> : <BsMoonFill size={20} />}
       </button>
     </div>
   );
