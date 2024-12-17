@@ -65,7 +65,7 @@ export default function Home() {
  
       <LoadingScreen />
      
-      {/* <SoundEffects />  */}
+      <SoundEffects /> 
 
       {/* Main Components */}
       <Navbar />
