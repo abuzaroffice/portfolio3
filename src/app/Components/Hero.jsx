@@ -8,47 +8,48 @@ const Hero = () => {
   const textRefs = useRef([]);
 
   useEffect(() => {
-    // Reduce the delay to sync with the loading screen animation
-    const delayAfterLanding = 2; // Reduced delay to sync with loading screen
+    const delayAfterLanding = 2.6; // Delay for the animation to start
 
     // Create a GSAP timeline for Hero animation
     const tl = gsap.timeline({
-      defaults: { duration: 0.8, ease: "power3.out" }, // Reduced duration
+      defaults: { duration: 1.0, ease: "power3.out" }, // Adjusted duration
       delay: delayAfterLanding, // Start after landing animation completes
     });
 
     // Animate the image with a fade-up effect
     tl.fromTo(
       imageRef.current,
-      { y: 100, opacity: 0 }, // Start position: below with 0 opacity
-      { y: 0, opacity: 1, duration: 1.0, ease: "power2.out" } // Reduced duration
+      { y: 100, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 1.0, ease: "power2.out" } 
     );
 
-    // Animate the text with a smooth vertical slide and fade-in effect
+   
     tl.fromTo(
       textRefs.current,
       { y: 100, opacity: 0 },
       {
         y: 0,
         opacity: 1,
-        stagger: 0.15, // Faster stagger
-        duration: 0.8, // Reduced duration
+        stagger: 0.2, // Adjusted stagger for a smoother flow
+        duration: 1.0, // Duration for text animation
         ease: "power2.out",
       },
-      "-=0.8"
+      "-=0.8" // Ensures the text starts before the image finishes
     );
 
-    // Apply a static glowing effect around the image container
-    gsap.fromTo(
-      imageContainerRef.current,
-      { boxShadow: "0 0 0px rgba(72, 187, 120, 0.7)" }, // Initial state (no glow)
-      {
-        boxShadow: "0 0 30px 10px rgba(72, 187, 120, 0.7)", // Green static glow
-        duration: 1.0, // Reduced duration
-        ease: "power2.out",
-        delay: delayAfterLanding + 0.8, // Start after image and text animations
-      }
-    );
+    // Apply a glowing effect around the image container
+    // Apply a glowing effect around the image container
+gsap.fromTo(
+  imageContainerRef.current,
+  { boxShadow: "0 0 0px rgba(146, 64, 14, 0.7)" }, // amber-800 (no glow)
+  {
+    boxShadow: "0 0 30px 10px rgba(146, 64, 14, 0.7)", // amber-800 glow
+    duration: 1.0, // Glowing effect duration
+    ease: "power2.out",
+    delay: delayAfterLanding + 1.0, // Delay to match the other animations
+  }
+);
+
   }, []);
 
   return (
@@ -59,7 +60,7 @@ const Hero = () => {
           {/* Left - Image */}
           <div
             ref={imageContainerRef}
-            className="rounded-full overflow-hidden w-72 h-72 lg:w-96 lg:h-96 relative"
+            className="rounded-full overflow-hidden w-72 h-72 lg:w-96 lg:h-96 relative shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out"
           >
             <img
               ref={imageRef}
@@ -72,20 +73,26 @@ const Hero = () => {
           {/* Right - Text */}
           <div className="text-center text-6xl mt-5 lg:text-9xl space-y-2 lg:space-y-4">
             <h1
-              ref={(el) => { if (el) textRefs.current[0] = el }}
-              className="font-Cursive text-green-400"
+              ref={(el) => {
+                if (el) textRefs.current[0] = el;
+              }}
+              className="font-Cursive text-amber-800"
             >
               Creative
             </h1>
             <h1
-              ref={(el) => { if (el) textRefs.current[1] = el }}
+              ref={(el) => {
+                if (el) textRefs.current[1] = el;
+              }}
               className="font-Mazius"
             >
               Designer
             </h1>
             <h1
-              ref={(el) => { if (el) textRefs.current[2] = el }}
-              className="font-Cursive text-green-400"
+              ref={(el) => {
+                if (el) textRefs.current[2] = el;
+              }}
+              className="font-Cursive text-amber-800"
             >
               Developer
             </h1>

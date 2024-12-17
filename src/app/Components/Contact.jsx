@@ -101,7 +101,7 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto text-center relative z-10">
         <h2
           ref={headingRef}
-          className="text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg"
+          className="text-6xl sm:text-6xl md:text-8xl font-Mazius text-amber-800 drop-shadow-lg"
         >
           Let's Connect
         </h2>
@@ -118,7 +118,7 @@ const Contact = () => {
                   required
                   placeholder="Your name"
                   value={name}
-                  className="w-full p-4 bg-transparent border-b-2 font-Cursive border-gray-400 focus:border-green-600 outline-none transition duration-300"
+                  className="w-full p-4 bg-transparent border-b-2 font-Cursive border-gray-400 focus:border-amber-800 outline-none transition duration-300"
                 />
               </div>
 
@@ -132,7 +132,7 @@ const Contact = () => {
                   required
                   placeholder="email@example.com"
                   value={email}
-                  className="w-full p-4 bg-transparent border-b-2 font-Cursive border-gray-400 focus:border-green-600 outline-none transition duration-300"
+                  className="w-full p-4 bg-transparent border-b-2 font-Cursive border-gray-400 focus:border-amber-600 outline-none transition duration-300"
                 />
               </div>
 
@@ -146,14 +146,14 @@ const Contact = () => {
                   rows="4"
                   value={description}
                   placeholder="Enter your message"
-                  className="w-full p-4 bg-transparent border-b-2 font-Cursive border-gray-400 focus:border-green-600 outline-none transition duration-300"
+                  className="w-full p-4 bg-transparent border-b-2 font-Cursive border-gray-400 focus:border-amber-600 outline-none transition duration-300"
                 />
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-3 bg-green-400 text-white rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out"
+                className="w-full py-3 bg-amber-800 text-white rounded-lg shadow-md hover:bg-amber-600 transition duration-300 ease-in-out"
               >
                 Submit Form
               </button>
@@ -167,4 +167,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

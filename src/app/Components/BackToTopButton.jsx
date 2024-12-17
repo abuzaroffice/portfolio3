@@ -36,11 +36,11 @@ const BackToTopButton = () => {
       className={`fixed 
         bottom-4 right-4 md:bottom-6 md:right-6 lg:bottom-8 lg:right-8
         px-3 py-3 md:px-4 md:py-4 lg:px-5 lg:py-5 
-        rounded-full bg-green-400 text-white 
+        rounded-full bg-amber-600 text-white 
         text-xl md:text-2xl lg:text-3xl 
         shadow-lg transition-opacity duration-300 ease-in-out 
         ${isVisible ? "opacity-100" : "opacity-0"} 
-        hover:bg-green-700`}
+        hover:bg-amber-700`}
       style={{ display: isVisible ? "block" : "none" }}
       aria-label="Back to top"
     >

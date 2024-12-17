@@ -33,25 +33,26 @@ const ImageCarousel = () => {
 
   // GSAP animations
   useEffect(() => {
-    if (!carouselRef.current) return; // Ensure ref is attached
+    if (!carouselRef.current) return;
 
     const carouselItems = carouselRef.current.querySelectorAll('.carousel-item');
-    gsap.fromTo(
-      carouselItems,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: 'power3.out',
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: carouselRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      }
-    );
+    carouselItems.forEach((item, index) => {
+      gsap.fromTo(
+        item,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: item,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    });
   }, []);
 
   // Open image in modal
@@ -64,11 +65,11 @@ const ImageCarousel = () => {
 
     gsap.fromTo(
       modalRef.current,
-      { opacity: 0, scale: 0.9 },
+      { opacity: 0, scale: 0.95 },
       {
         opacity: 1,
-        scale: 0.85,
-        duration: 0.4,
+        scale: 1,
+        duration: 0.5,
         ease: 'power3.out',
         onComplete: () => setIsAnimating(false),
       }
@@ -84,8 +85,8 @@ const ImageCarousel = () => {
 
     gsap.to(modalRef.current, {
       opacity: 0,
-      scale: 0.9,
-      duration: 0.4,
+      scale: 0.95,
+      duration: 0.5,
       ease: 'power3.in',
       onComplete: () => {
         setSelectedImage(null);
@@ -102,7 +103,7 @@ const ImageCarousel = () => {
 
   return (
     <div id='photo-section' className="max-w-screen-xl container mx-auto px-4 py-8">
-      <h1 className="text-6xl text-center sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg mb-10">
+      <h1 className="text-6xl text-center sm:text-6xl md:text-8xl font-Mazius text-amber-800 drop-shadow-lg mb-10">
         Photography Showcase
       </h1>
 
@@ -119,20 +120,40 @@ const ImageCarousel = () => {
           {images.map((image, index) => (
             <div
               key={index}
-              className="carousel-item min-w-full flex items-center justify-center cursor-pointer relative"
+              className="carousel-item min-w-full flex items-center justify-center cursor-pointer relative group"
               onClick={() => openPopup(image)}
             >
-              <div className="relative w-3/4 h-96">
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="absolute inset-0 w-full h-full object-cover rounded-xl shadow-md hover:scale-110 transition-transform duration-500 ease-in-out border-4 border-white"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-xl flex items-end p-4">
-                  <span className="text-white font-Cursive text-xl font-medium">{image.caption}</span>
+              <div className="relative w-3/4 h-96 transform group-hover:scale-105 transition-transform duration-500">
+                {/* Image with Gradient Border */}
+                <div className="relative w-full h-full rounded-xl overflow-hidden group-hover:shadow-2xl transition-shadow duration-500">
+                  <div className="absolute inset-0 p-[4px] bg-gradient-to-r from-amber-600 to-yellow-300 rounded-xl">
+                    <div className="w-full h-full bg-white rounded-xl overflow-hidden">
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="absolute inset-0 w-full h-full object-cover rounded-lg transform transition-transform duration-500 ease-in-out group-hover:scale-110"
+                      />
+                    </div>
+                  </div>
+                </div>
+                {/* Caption */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-xl flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <span className="text-white font-Cursive text-xl font-medium">
+                    {image.caption}
+                  </span>
                 </div>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {images.map((_, index) => (
+            <div
+              key={index}
+              className={`w-3 h-3 rounded-full ${index === currentIndex ? 'bg-amber-800' : 'bg-gray-300'} transition-all duration-300`}
+            ></div>
           ))}
         </div>
       </div>
@@ -143,10 +164,10 @@ const ImageCarousel = () => {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75"
           ref={modalRef}
         >
-          <div className="relative w-9/12 max-w-96 mx-auto bg-white rounded-xl shadow-xl overflow-hidden border-4 border-gray-200">
+          <div className="relative w-9/12 max-w-96 mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
             <button
               onClick={closePopup}
-              className="absolute top-4 right-4 bg-green-500 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:bg-green-600 transition duration-300"
+              className="absolute top-4 right-4 bg-amber-800 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:bg-amber-900 transition duration-300"
             >
               ✕
             </button>
@@ -154,7 +175,7 @@ const ImageCarousel = () => {
               <img
                 src={selectedImage.src}
                 alt={selectedImage.alt}
-                className="w-full h-auto rounded-lg border-4 border-gray-300"
+                className="w-full h-auto rounded-lg border-4 border-amber-800"
               />
               <div className="mt-4 text-center">
                 <h2 className="text-2xl font-Cursive font-semibold text-gray-800">

@@ -45,16 +45,17 @@ const About = () => {
       }
     );
 
-    // Paragraph animation
-    const words = paragraphRef.current.querySelectorAll("span");
+    // Paragraph animation (line-by-line scroll-up effect)
+    const lines = paragraphRef.current.querySelectorAll(".line");
     gsap.fromTo(
-      words,
-      { opacity: 0 },
+      lines,
+      { opacity: 0, y: 50 },
       {
         opacity: 1,
-        duration: 0.3,
+        y: 0,
+        duration: 0.6,
         ease: "power3.out",
-        stagger: 0.1,
+        stagger: 0.2,
         scrollTrigger: {
           trigger: paragraphRef.current,
           start: "top 85%",
@@ -71,7 +72,7 @@ const About = () => {
         {/* Heading */}
         <div
           ref={headingRef}
-          className="about-heading text-center  text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg"
+          className="about-heading text-center text-6xl sm:text-6xl md:text-8xl font-Mazius text-amber-800 drop-shadow-lg"
         >
           <h1>About Me</h1>
         </div>
@@ -91,12 +92,12 @@ const About = () => {
         {/* Paragraph */}
         <div
           ref={paragraphRef}
-          className="about-paragraph max-h-[400px] sm:max-h-[500px] overflow-y-auto text-sm sm:text-base md:text-lg lg:text-xl font-Cursive  w-full sm:w-11/12 md:w-10/12 lg:w-8/12 xl:w-7/12 text-justify mx-auto mt-6 px-4"
+          className="about-paragraph text-sm sm:text-base md:text-lg lg:text-xl font-Cursive w-full sm:w-11/12 md:w-10/12 lg:w-8/12 xl:w-7/12 text-justify mx-auto mt-6 px-4"
         >
-          {paragraphText.split(" ").map((word, index) => (
-            <span key={index} className="inline-block mr-1">
-              {word}
-            </span>
+          {paragraphText.split(". ").map((line, index) => (
+            <p key={index} className="line mb-4">
+              {line}.
+            </p>
           ))}
         </div>
 
@@ -105,7 +106,7 @@ const About = () => {
           <a
             href="/Abuzar'sCV.docx"
             download
-            className="inline-block px-6 py-3 text-sm sm:text-base md:text-lg font-Cursive font-semibold bg-green-500 rounded-lg shadow-lg hover:bg-green-600 transition-colors"
+            className="inline-block px-6 py-3 text-sm sm:text-base md:text-lg text-white font-Cursive font-semibold bg-amber-800 rounded-lg shadow-lg hover:bg-amber-600 transition-colors"
           >
             Download Resume
           </a>

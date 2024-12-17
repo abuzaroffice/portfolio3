@@ -5,7 +5,6 @@ import Navbar from "./Components/Navbar";
 import Hero from "./Components/Hero";
 import DynamicCursor from "./Components/DynamicCursor";
 import About from "./Components/About";
-import Skills from "./Components/Skills";
 import LoadingScreen from "./Components/LoadingScreen";
 import BackToTopButton from "./Components/BackToTopButton";
 import PhotographySkills from "./Components/PhotographySkills";
@@ -14,6 +13,7 @@ import Testimonial from "./Components/Testimonial";
 import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import SoundEffects from "./Components/SoundEffect"; 
+import Skills from "./Components/Skills";
 
 
 // Dock Component
@@ -22,7 +22,7 @@ const Dock = ({ toggleTheme, theme }) => {
     <div
     className={`fixed bottom-4 left-4 flex items-center 
       p-2 sm:p-3 
-      bg-gray-800 dark:bg-gray-200 
+      bg-amber-800 dark:bg-amber-800  // Updated to amber-800 for both themes
       rounded-full shadow-lg transition-all`}
   >
     {/* Theme Toggle */}
@@ -30,16 +30,18 @@ const Dock = ({ toggleTheme, theme }) => {
       onClick={toggleTheme}
       className={`flex items-center justify-center 
         w-8 h-8 sm:w-10 sm:h-10 
-        bg-green-500 dark:bg-gray-300 
-        text-white dark:text-green-900 
+        bg-amber-700 dark:bg-amber-600 // Button background now amber
+        text-white dark:text-amber-200  // Light text on dark theme
         rounded-full shadow-md 
-        hover:bg-green-600 dark:hover:bg-gray-400 
+        hover:bg-amber-600 dark:hover:bg-amber-500  // Hover effects with darker amber
         transition-transform hover:scale-110`}
       aria-label="Toggle Theme"
     >
       {theme === "light" ? "🌙" : "☀️"}
     </button>
   </div>
+  
+  
   
   );
 };
@@ -58,12 +60,12 @@ export default function Home() {
 
   return (
     <div
-      className={`relative ${theme === "dark" ? "bg-black text-white" : "bg-white text-black"}`}
+    className={`relative ${theme === "light" ? "bg-black text-white" : "bg-white text-black"}`} 
     >
  
       <LoadingScreen />
      
-      <SoundEffects /> 
+      {/* <SoundEffects />  */}
 
       {/* Main Components */}
       <Navbar />

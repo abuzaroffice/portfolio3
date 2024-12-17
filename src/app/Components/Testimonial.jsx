@@ -65,7 +65,7 @@ const Testimonial = () => {
         ref={containerRef}
         className="max-w-6xl mx-auto text-center"
       >
-        <h2 className="text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg mb-12">
+        <h2 className="text-6xl sm:text-6xl md:text-8xl font-Mazius text-amber-800 drop-shadow-lg mb-12">
           What People Say
         </h2>
 

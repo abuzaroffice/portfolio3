@@ -1,167 +1,71 @@
-import React, { useEffect } from 'react';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import React, { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
+
+const skillsData = [
+  { name: "HTML", level: 90, color: "bg-orange-500", icon: "🌐" }, // HTML (Orange)
+  { name: "CSS", level: 85, color: "bg-blue-500", icon: "🎨" }, // CSS (Blue)
+  { name: "JavaScript", level: 80, color: "bg-yellow-400", icon: "⚡" }, // JavaScript (Yellow)
+  { name: "React.js", level: 75, color: "bg-cyan-400", icon: "⚛️" }, // React (Cyan)
+  { name: "Next.js", level: 70, color: "bg-gray-800", icon: "🚀" }, // Next.js (Dark Gray)
+  { name: "Tailwind CSS", level: 85, color: "bg-teal-400", icon: "💨" }, // Tailwind CSS (Teal)
+];
 
 const Skills = () => {
   useEffect(() => {
-    // GSAP scroll-triggered animations for each progress bar with different percentages
-    gsap.fromTo(
-      '.html-progress', 
-      { width: '0%' },
-      {
-        width: '90%', // Set HTML progress bar width to 90%
-        duration: 2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.html-progress',
-          start: 'top 80%', 
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      '.css-progress',
-      { width: '0%' },
-      {
-        width: '85%', 
-        duration: 2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.css-progress',
-          start: 'top 80%', 
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      '.js-progress',
-      { width: '0%' },
-      {
-        width: '80%', // Set JavaScript progress bar width to 80%
-        duration: 0.5,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.js-progress',
-          start: 'top 80%', // Start animation when top of the skill section reaches 80% of the viewport
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      '.react-progress',
-      { width: '0%' },
-      {
-        width: '75%', // Set React.js progress bar width to 75%
-        duration: 0.5,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.react-progress',
-          start: 'top 80%', 
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      '.next-progress',
-      { width: '0%' },
-      {
-        width: '70%', 
-        duration: 0.5,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.next-progress',
-          start: 'top 80%', 
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      '.tailwind-progress',
-      { width: '0%' },
-      {
-        width: '80%', 
-        duration: 2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.tailwind-progress',
-          start: 'top 80%', 
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
+    gsap.utils.toArray(".progress-bar").forEach((bar) => {
+      gsap.fromTo(
+        bar,
+        { width: "0%" },
+        {
+          width: `${bar.dataset.level}%`,
+          duration: 2.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: bar,
+            start: "top 90%",
+            end: "top 60%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
   }, []);
 
   return (
-    <section className="py-8 container mx-auto">
-      <div id="skills-section" className="text-center">
-        <h1 className="text-6xl sm:text-6xl md:text-8xl font-Mazius text-green-400 drop-shadow-lg">Skills</h1>
+    <div className="py-20 px-5 ">
+      <h2 className="text-6xl text-center sm:text-6xl md:text-8xl font-Mazius text-amber-800 drop-shadow-lg mb-10">
+        My Skills
+      </h2>
+      <div className="max-w-5xl mx-auto space-y-12">
+        {skillsData.map((skill, index) => (
+          <div key={index} className="w-full">
+            <div className="flex items-center mb-3">
+              <span className="text-2xl mr-3">{skill.icon}</span>
+              <h3 className="text-xl font-bold text-gray-700 uppercase flex-1">
+                {skill.name}
+              </h3>
+              <span className="text-gray-600 text-lg font-medium">
+                {skill.level}%
+              </span>
+            </div>
+            <div className="w-full bg-gray-300 rounded-full h-6 relative shadow-md">
+              <div
+                className={`progress-bar h-full rounded-full ${skill.color} shadow-lg`}
+                data-level={skill.level}
+              ></div>
+              {/* Glow effect */}
+              <div
+                className={`absolute top-0 left-0 h-full rounded-full blur-md opacity-50 ${skill.color}`}
+                style={{ width: `${skill.level}%` }}
+              ></div>
+            </div>
+          </div>
+        ))}
       </div>
-
-      {/* Skills List */}
-      <div className="skills-container mt-4 text-center sm:px-6 md:px-8">
-        {/* HTML Skill */}
-        <div className="skill mb-4 sm:mb-6">
-          <h1 className="font-Cursive text-lg sm:text-xl md:text-2xl">HTML</h1>
-          <div className="w-full sm:w-3/4 mx-auto mt-2 sm:mt-4">
-            <div className="progress-bar html-progress h-4 sm:h-6 rounded-full bg-green-500"></div>
-          </div>
-        </div>
-
-        {/* CSS Skill */}
-        <div className="skill mb-4 sm:mb-6">
-          <h1 className="font-Cursive text-lg sm:text-xl md:text-2xl">CSS</h1>
-          <div className="w-full sm:w-3/4 mx-auto mt-2 sm:mt-4">
-            <div className="progress-bar css-progress h-4 sm:h-6 rounded-full bg-blue-500"></div>
-          </div>
-        </div>
-
-        {/* JavaScript Skill */}
-        <div className="skill mb-4 sm:mb-6">
-          <h1 className="font-Cursive text-lg sm:text-xl md:text-2xl">JavaScript</h1>
-          <div className="w-full sm:w-3/4 mx-auto mt-2 sm:mt-4">
-            <div className="progress-bar js-progress h-4 sm:h-6 rounded-full bg-yellow-500"></div>
-          </div>
-        </div>
-
-        {/* React.js Skill */}
-        <div className="skill mb-4 sm:mb-6">
-          <h1 className="font-Cursive text-lg sm:text-xl md:text-2xl">React.js</h1>
-          <div className="w-full sm:w-3/4 mx-auto mt-2 sm:mt-4">
-            <div className="progress-bar react-progress h-4 sm:h-6 rounded-full bg-blue-600"></div>
-          </div>
-        </div>
-
-        {/* Next.js Skill */}
-        <div className="skill mb-4 sm:mb-6">
-          <h1 className="font-Cursive text-lg sm:text-xl md:text-2xl">Next.js</h1>
-          <div className="w-full sm:w-3/4 mx-auto mt-2 sm:mt-4">
-            <div className="progress-bar next-progress h-4 sm:h-6 rounded-full bg-gray-800"></div>
-          </div>
-        </div>
-
-        {/* Tailwind CSS Skill */}
-        <div className="skill mb-4 sm:mb-6">
-          <h1 className="font-Cursive text-lg sm:text-xl md:text-2xl">Tailwind CSS</h1>
-          <div className="w-full sm:w-3/4 mx-auto mt-2 sm:mt-4">
-            <div className="progress-bar tailwind-progress h-4 sm:h-6 rounded-full bg-teal-400"></div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
   );
 };
 

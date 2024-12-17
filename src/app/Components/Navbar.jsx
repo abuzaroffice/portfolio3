@@ -10,8 +10,8 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Initial animations for the navbar elements
-    const tl = gsap.timeline({ defaults: { duration: 1, ease: "power3.out" }, delay: 1.5 });
+    // Initial animations for the navbar elements with a delay of 2.6 seconds
+    const tl = gsap.timeline({ defaults: { duration: 1, ease: "power3.out" }, delay: 2.6 });
 
     // Animate the logo
     tl.fromTo(logoRef.current, { y: -30, opacity: 0 }, { y: 0, opacity: 1 });
@@ -88,20 +88,20 @@ const Navbar = () => {
       <div id="navbar" className="flex justify-between items-center container mx-auto px-6 py-4 lg:px-10 lg:py-6">
         {/* Logo */}
         <div ref={logoRef}>
-          <a href="#" className="font-Mazius text-4xl lg:text-4xl text-green-400">Abuzar's Portfolio</a>
+          <a href="#" className="font-Mazius text-4xl lg:text-4xl text-amber-800">Abuzar's Portfolio</a>
         </div>
 
         {/* Links for large screens */}
         <div className="hidden lg:flex font-Cursive gap-10 text-lg lg:text-xl">
-          <a className="hover:text-green-400" href="#about-section" ref={(el) => (linksRef.current[0] = el)}>About</a>
-          <a className="hover:text-green-400" href="#skills-section" ref={(el) => (linksRef.current[1] = el)}>Skills</a>
-          <a className="hover:text-green-400" href="#photo-section" ref={(el) => (linksRef.current[2] = el)}>Photography</a>
-          <a className="hover:text-green-400" href="#projects-section" ref={(el) => (linksRef.current[3] = el)}>Projects</a>
-          <a className="hover:text-green-400" href="#testimonials-section" ref={(el) => (linksRef.current[4] = el)}>Testimonial</a>
+          <a className="hover:text-amber-800" href="#about-section" ref={(el) => (linksRef.current[0] = el)}>About</a>
+          <a className="hover:text-amber-800" href="#skills-section" ref={(el) => (linksRef.current[1] = el)}>Skills</a>
+          <a className="hover:text-amber-800" href="#photo-section" ref={(el) => (linksRef.current[2] = el)}>Photography</a>
+          <a className="hover:text-amber-800" href="#projects-section" ref={(el) => (linksRef.current[3] = el)}>Projects</a>
+          <a className="hover:text-amber-800" href="#testimonials-section" ref={(el) => (linksRef.current[4] = el)}>Testimonial</a>
         </div>
 
         {/* Contact */}
-        <div ref={contactRef} className="hidden lg:block font-Cursive text-lg hover:text-white lg:text-xl text-green-400">
+        <div ref={contactRef} className="hidden lg:block font-Cursive text-lg hover:text-white lg:text-xl text-amber-800">
           <a href="#contact-section">Contact Us</a>
         </div>
 
@@ -126,7 +126,7 @@ const Navbar = () => {
         >
           ✕
         </div>
-        <div className="font-Cursive text-xl text-white flex flex-col gap-6">
+        <div className="font-Cursive text-xl text-amber-800 flex flex-col gap-6">
           <a href="#about-section" onClick={handleLinkClick} ref={(el) => (linksRef.current[0] = el)}>About</a>
           <a href="#skills-section" onClick={handleLinkClick} ref={(el) => (linksRef.current[1] = el)}>Skills</a>
           <a href="#photo-section" onClick={handleLinkClick} ref={(el) => (linksRef.current[2] = el)}>Photography</a>
