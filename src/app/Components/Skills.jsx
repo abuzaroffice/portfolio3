@@ -5,12 +5,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const skillsData = [
-  { name: "HTML", level: 90, color: "bg-orange-500", icon: "🌐" }, // HTML (Orange)
-  { name: "CSS", level: 85, color: "bg-blue-500", icon: "🎨" }, // CSS (Blue)
-  { name: "JavaScript", level: 80, color: "bg-yellow-400", icon: "⚡" }, // JavaScript (Yellow)
-  { name: "React.js", level: 75, color: "bg-cyan-400", icon: "⚛️" }, // React (Cyan)
-  { name: "Next.js", level: 70, color: "bg-gray-800", icon: "🚀" }, // Next.js (Dark Gray)
-  { name: "Tailwind CSS", level: 85, color: "bg-teal-400", icon: "💨" }, // Tailwind CSS (Teal)
+  { name: "HTML", level: 90, icon: "🌐" }, // HTML
+  { name: "CSS", level: 85, icon: "🎨" }, // CSS
+  { name: "JavaScript", level: 80, icon: "⚡" }, // JavaScript
+  { name: "React.js", level: 75, icon: "⚛️" }, // React.js
+  { name: "Next.js", level: 70, icon: "🚀" }, // Next.js
+  { name: "Tailwind CSS", level: 85, icon: "💨" }, // Tailwind CSS
 ];
 
 const Skills = () => {
@@ -53,12 +53,12 @@ const Skills = () => {
             </div>
             <div className="w-full bg-gray-300 rounded-full h-6 relative shadow-md">
               <div
-                className={`progress-bar h-full rounded-full ${skill.color} shadow-lg`}
+                className={`progress-bar h-full rounded-full bg-amber-800 shadow-lg`}
                 data-level={skill.level}
               ></div>
               {/* Glow effect */}
               <div
-                className={`absolute top-0 left-0 h-full rounded-full blur-md opacity-50 ${skill.color}`}
+                className={`absolute top-0 left-0 h-full rounded-full blur-md opacity-50 bg-amber-800`}
                 style={{ width: `${skill.level}%` }}
               ></div>
             </div>

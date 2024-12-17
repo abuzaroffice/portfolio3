@@ -12,7 +12,7 @@ const images = [
   { src: '/Peacelilly.jpg', alt: 'Pod 1', caption: 'Innovative Pod Architecture' },
   { src: '/MG.JPG', alt: 'Pod 2', caption: 'Winter is here' },
   { src: '/Road.JPG', alt: 'Road', caption: 'Scenic Road View' },
-  { src: '/Tree.jpg', alt: 'Tree', caption: 'Tall and Majestic Tree' },
+  { src: '/Tree.JPG', alt: 'Tree', caption: 'Tall and Majestic Tree' },
 ];
 
 const ImageCarousel = () => {
