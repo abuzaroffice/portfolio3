@@ -66,6 +66,12 @@ const Projects = () => {
       image: "/Pixlequest.png",
       link: "https://pixlequest.netlify.app/",
     },
+    {
+      title: "El-Interio",
+      description: "Creative interior design solutions with animations.",
+      image: "/El-interio.png",
+      link: "https://interior-design--mu.vercel.app/",
+    },
   ];
 
   return (
@@ -75,7 +81,7 @@ const Projects = () => {
           My Projects
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
           {projects.map((project, index) => (
             <div
               key={index}
