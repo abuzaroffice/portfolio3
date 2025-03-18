@@ -44,7 +44,7 @@ const About = () => {
         },
       }
     );
-
+//push
     // Paragraph animation (line-by-line scroll-up effect)
     const lines = paragraphRef.current.querySelectorAll(".line");
     gsap.fromTo(
