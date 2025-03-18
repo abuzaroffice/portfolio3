@@ -72,6 +72,12 @@ const Projects = () => {
       image: "/El-interio.png",
       link: "https://interior-design--mu.vercel.app/",
     },
+    {
+      title: "Jet-setGo",
+      description: "Embark on a journey of wonder and excitment",
+      image: "/jetsetgo.png",
+      link: "https://jetsett-go.netlify.app/",
+    },
   ];
 
   return (
